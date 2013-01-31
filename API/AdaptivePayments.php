@@ -212,7 +212,6 @@ class AdaptivePayments extends Nette\Object
 
 		$answer = curl_exec($curl);
 		if (curl_errno($curl)) {
-			// echo (string) curl_errno($curl); die();
 			echo (string) curl_errno($curl), " ", curl_error($curl); die();
 			throw new RequestFailureException( $answer );
 		}
