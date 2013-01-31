@@ -9,6 +9,7 @@ class Exception extends \Exception
 	const RESTRICTED_ACCOUNT = 520009;
 	const DUPLICATE_RECEIVER = 579040;
 	const SAME_SENDER_AND_RECEIVER = 579033;
+	const INVALID_PAYKEY = 580022;
 
 
 
