@@ -5,10 +5,10 @@ namespace PayPal\API\Requests;
 use Nette;
 use PayPal;
 
-require_once __DIR__ . '/APIRequest.php';
+require_once __DIR__ . '/IApiRequest.php';
 
 
-class PayRequest extends Nette\Object implements PayPal\API\Requests\APIRequest
+class PayRequest extends Nette\Object implements IApiRequest
 {
 	/** @var string */
 	protected $actionType;

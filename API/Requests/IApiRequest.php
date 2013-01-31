@@ -4,7 +4,7 @@ namespace PayPal\API\Requests;
 
 
 
-interface APIRequest
+interface IApiRequest
 {
 	/** @return array */
 	function getRequestData();
