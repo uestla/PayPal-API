@@ -3,7 +3,6 @@
 namespace PayPal\API\Requests;
 
 
-
 interface IApiRequest
 {
 	/** @return array */
