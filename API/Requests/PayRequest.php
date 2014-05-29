@@ -10,6 +10,7 @@ require_once __DIR__ . '/IApiRequest.php';
 
 class PayRequest extends Nette\Object implements IApiRequest
 {
+
 	/** @var string */
 	protected $actionType;
 
@@ -38,7 +39,6 @@ class PayRequest extends Nette\Object implements IApiRequest
 	protected $fundingConstraint = NULL;
 
 
-
 	const ACTION_PAY = 'PAY';
 	const ACTION_CREATE = 'CREATE';
 	const ACTION_PAY_PRIMARY = 'PAY_PRIMARY';
@@ -53,13 +53,12 @@ class PayRequest extends Nette\Object implements IApiRequest
 	const FUNDING_TYPE_CREDITCARD = 'CREDITCARD';
 
 
-
 	/**
-	 * @param  string
-	 * @param  array of receiver (each item is an array(email => $email, amount => $amount) )
-	 * @param  string
-	 * @param  string
-	 * @param  string
+	 * @param  string $actionType
+	 * @param  array $receivers of receiver (each item is an array(email => $email, amount => $amount) )
+	 * @param  string $currencyCode
+	 * @param  string $cancelUrl
+	 * @param  string $returnUrl
 	 */
 	function __construct($actionType, array $receivers, $currencyCode, $cancelUrl, $returnUrl)
 	{
@@ -74,13 +73,11 @@ class PayRequest extends Nette\Object implements IApiRequest
 	}
 
 
-
 	function setFeesPayer($feesPayer)
 	{
 		$this->feesPayer = $feesPayer;
 		return $this;
 	}
-
 
 
 	function setIpnNotificationUrl($ipnNotificationUrl)
@@ -90,13 +87,11 @@ class PayRequest extends Nette\Object implements IApiRequest
 	}
 
 
-
 	function setSenderEmail($senderEmail)
 	{
 		$this->senderEmail = $senderEmail;
 		return $this;
 	}
-
 
 
 	function addFundingType($type)
@@ -115,7 +110,6 @@ class PayRequest extends Nette\Object implements IApiRequest
 
 		return $this;
 	}
-
 
 
 	function getRequestData()
@@ -150,4 +144,5 @@ class PayRequest extends Nette\Object implements IApiRequest
 
 		return $data;
 	}
+
 }

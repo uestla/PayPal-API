@@ -11,6 +11,7 @@ require_once __DIR__ . '/Requests/PayRequest.php';
 
 class AdaptivePayments extends Nette\Object
 {
+
 	/** @var string */
 	protected $appOwner;
 
@@ -22,7 +23,6 @@ class AdaptivePayments extends Nette\Object
 
 	/** @var string|NULL */
 	protected $defaultCurrency;
-
 
 
 	const SANDBOX_END_POINT = 'https://svcs.sandbox.paypal.com/AdaptivePayments/';
@@ -41,7 +41,6 @@ class AdaptivePayments extends Nette\Object
 
 	const DOLLAR = 'USD';
 	const CZECH_CRONE = 'CZK';
-
 
 
 	function __construct($appOwner, $username, $password, $signature, $ipAddress, $appID = NULL, $sandbox = TRUE, $defaultCurrency = NULL)
@@ -63,12 +62,10 @@ class AdaptivePayments extends Nette\Object
 	}
 
 
-
 	function getAppOwner()
 	{
 		return $this->appOwner;
 	}
-
 
 
 	function createPayRequest($actionType, array $receivers, $currencyCode, $cancelUrl, $returnUrl)
@@ -81,12 +78,10 @@ class AdaptivePayments extends Nette\Object
 	}
 
 
-
 	function sendPayRequest(Requests\PayRequest $request)
 	{
 		return $this->get('Pay', $request->getRequestData());
 	}
-
 
 
 	function getPaymentDetails($payKey = NULL, $transactionID = NULL, $trackingID = NULL)
@@ -111,18 +106,16 @@ class AdaptivePayments extends Nette\Object
 	}
 
 
-
 	function getLoginRedirectionUrl($payKey)
 	{
-		$url = new Nette\Http\Url( $this->getWebScrUrl() );
+		$url = new Nette\Http\Url($this->getWebScrUrl());
 		$url->setQuery(array(
 			static::CMD_KEY => static::APP_VALUE,
-			'paykey'        => $payKey,
+			'paykey' => $payKey,
 		));
 
 		return (string) $url;
 	}
-
 
 
 	function executePayment($payKey, $fundingPlanID = NULL)
@@ -143,7 +136,6 @@ class AdaptivePayments extends Nette\Object
 	}
 
 
-
 	function verifyStatus(array $data, & $query = NULL)
 	{
 		$new = array();
@@ -158,9 +150,7 @@ class AdaptivePayments extends Nette\Object
 	}
 
 
-
 	// === INTERNAL METHODS ========================================================================
-
 
 
 	/** @return string */
@@ -170,17 +160,15 @@ class AdaptivePayments extends Nette\Object
 	}
 
 
-
 	protected function getEndPoint($operation)
 	{
 		return ($this->sandbox ? static::SANDBOX_END_POINT : static::LIVE_END_POINT) . $operation;
 	}
 
 
-
 	protected function get($operation, array $data)
 	{
-		$response = new Response( (array) Nette\Utils\Json::decode( $this->sendRequest( $this->getEndPoint($operation), Nette\Utils\Json::encode($data) ) ) );
+		$response = new Response((array) Nette\Utils\Json::decode($this->sendRequest($this->getEndPoint($operation), Nette\Utils\Json::encode($data))));
 
 		if (!$response->isSuccessFull()) {
 			throw new Exception($response);
@@ -188,7 +176,6 @@ class AdaptivePayments extends Nette\Object
 
 		return $response;
 	}
-
 
 
 	protected function sendRequest($url, $data, $sendHeaders = TRUE)
@@ -213,10 +200,11 @@ class AdaptivePayments extends Nette\Object
 		$answer = curl_exec($curl);
 		if (curl_errno($curl)) {
 			echo (string) curl_errno($curl), " ", curl_error($curl); die();
-			throw new RequestFailureException( $answer );
+			throw new RequestFailureException($answer);
 		}
 
 		list (, $body) = explode("\r\n\r\n", $answer);
 		return $body;
 	}
+
 }

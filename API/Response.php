@@ -7,6 +7,7 @@ use Nette;
 
 class Response extends Nette\ArrayHash
 {
+
 	const STATUS_CREATED = 'CREATED';
 	const STATUS_COMPLETED = 'COMPLETED';
 	const STATUS_INCOMPLETE = 'INCOMPLETE';
@@ -17,8 +18,7 @@ class Response extends Nette\ArrayHash
 	const STATUS_EXPIRED = 'EXPIRED';
 
 
-
-	/** @param  array|\stdClass|\Traversable */
+	/** @param  array|\stdClass|\Traversable $values */
 	function __construct($values = NULL)
 	{
 		foreach ((array) $values as $key => $value) {
@@ -31,13 +31,11 @@ class Response extends Nette\ArrayHash
 	}
 
 
-
 	/** @return bool */
 	function isSuccessFull()
 	{
 		return isset($this->responseEnvelope->ack) && strcasecmp($this->responseEnvelope->ack, 'success') === 0;
 	}
-
 
 
 	/** @return string|NULL */
@@ -47,7 +45,6 @@ class Response extends Nette\ArrayHash
 	}
 
 
-
 	/** @return string|NULL */
 	function getCorrelationID()
 	{
@@ -55,10 +52,10 @@ class Response extends Nette\ArrayHash
 	}
 
 
-
 	/** @return string|NULL */
 	function getStatus()
 	{
 		return isset($this->status) ? $this->status : NULL;
 	}
+
 }

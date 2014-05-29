@@ -5,12 +5,12 @@ namespace PayPal\API;
 
 class Exception extends \Exception
 {
+
 	const INVALID_EMAIL = 589039;
 	const RESTRICTED_ACCOUNT = 520009;
 	const DUPLICATE_RECEIVER = 579040;
 	const SAME_SENDER_AND_RECEIVER = 579033;
 	const INVALID_PAYKEY = 580022;
-
 
 
 	function __construct(Response $response)
@@ -20,15 +20,15 @@ class Exception extends \Exception
 
 		parent::__construct($message, $code, NULL);
 	}
-}
 
+}
 
 
 class RequestFailureException extends \Exception
 {
+
 	/** @var array */
 	protected $response;
-
 
 
 	function __construct($response, $message = NULL, $code = NULL, $previous = NULL)
@@ -38,9 +38,9 @@ class RequestFailureException extends \Exception
 	}
 
 
-
 	function getValues()
 	{
 		return $this->response;
 	}
+
 }
